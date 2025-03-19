@@ -29,6 +29,10 @@ export const editContactCancelled = createAction(
     '[CONTACT MODAL] Edit Contact Cancelled (Cancel Clicked)'
 );
 
+export const addContactClicked = createAction(
+    '[CONTACT DETAIL] Add Contact Button Clicked'
+);
+
 export const contactSavedSuccess = createAction(
     '[BACKEND SERVICE] Contact Saved Successfully',
     props<{contact: Contact}>()

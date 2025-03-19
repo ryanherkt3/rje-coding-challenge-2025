@@ -26,7 +26,27 @@ In our main code base, you would expect to find this architecture replicated wit
 
 # Answers
 
-1. //Optionally provide any notes relating to question 1 here.
-2. //Optionally provide any notes relating to question 2 here.
-3. //Provide your answer to question 3 here.
+1. Modified `contact-list.component.html` to check the contact list has items (i.e. length > 0) - if true then the contact list is displayed, otherwise a loading message is displayed.
+
+2. Added a new `addContactClicked` action and `launchAddDialog$` effect, which opens the `contact-edit-dialog` when the Add Contact button (added in `contact-list.component.html`) is clicked.
+
+I modified the `contact-edit-dialog` component to show a different heading message depending on whether the user is editing a contact or adding one, and also edited the `saveContact` method in `contact.service.ts` to update the `contact` object with its proper ID whenever `index === -1` (as without this change, if trying to add a second new contact the details of the contact added previously will get updated instead).
+
+3. If a service function throws an error, we can use the `catchError` operator provided by RxJS. Inside the operator, we can return an observable with information about what the cause of the error is.
+
+Example snippet:
+```
+saveContact$ = createEffect(()=> this.actions$.pipe(
+        ofType(actions.editContactConfrimed),
+        concatMap(action =>
+            this.contactService.saveContact$(action.contact).pipe(
+                map(contact => actions.contactSavedSuccess({contact})),
+                catchError((error: Error) => {
+                    return of('Error saving contact: ' + error.message)
+                })
+            )
+        )
+    ))
+```
+
 4. //Provide your link or location of your file within the repo here.

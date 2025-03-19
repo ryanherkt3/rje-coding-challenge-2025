@@ -46,10 +46,11 @@ export class ContactService {
   saveContact$(contact: Contact): Observable<Contact> {
     // Find the index of the contact in the list
     let index = _.findIndex(this.mockList, (c) => c.id === contact.id);
-  
+
     if (index === -1) {
-      // If the contact doesn't exist, add it
-      this.mockList = [...this.mockList, { ...contact, id: this.getNextId() }];
+      // If the contact doesn't exist, get it's correct ID number then add it
+      contact = { ...contact, id: this.getNextId() };
+      this.mockList = [...this.mockList, contact];
     } else {
       // If the contact exists, replace it with a new object
       this.mockList = [
@@ -58,10 +59,10 @@ export class ContactService {
         ...this.mockList.slice(index + 1)
       ];
     }
-  
+
     return of(contact);
   }
-  
+
 
   private getNextId(): number {
     // Calculate the next ID based on the current highest ID
@@ -70,7 +71,7 @@ export class ContactService {
 
   //#endregion
 
-  editContactDialog$(contact: Contact) : Observable<Contact> {
+  editContactDialog$(contact: Contact | null) : Observable<Contact> {
 
     const dialogRef = this.dialog.open(ContactEditDialogComponent, {
       data: {
