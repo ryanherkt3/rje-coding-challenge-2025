@@ -28,7 +28,8 @@ In our main code base, you would expect to find this architecture replicated wit
 
 1. Modified `contact-list.component.html` to check the contact list has items (i.e. length > 0) - if true then the contact list is displayed, otherwise a loading message is displayed.
 
-2. Added a new `addContactClicked` action and `launchAddDialog$` effect, which opens the `contact-edit-dialog` when the Add Contact button (added in `contact-list.component.html`) is clicked.
+2.    
+Added a new `addContactClicked` action and `launchAddDialog$` effect, which opens the `contact-edit-dialog` when the Add Contact button (added in `contact-list.component.html`) is clicked.
 
 I modified the `contact-edit-dialog` component to show a different heading message depending on whether the user is editing a contact or adding one, and also edited the `saveContact` method in `contact.service.ts` to update the `contact` object with its proper ID whenever `index === -1` (as without this change, if trying to add a second new contact the details of the contact added previously will get updated instead).
 
@@ -49,4 +50,4 @@ saveContact$ = createEffect(()=> this.actions$.pipe(
     ))
 ```
 
-4. //Provide your link or location of your file within the repo here.
+4. https://www.figma.com/board/xzteWsZ6iJFcIvWToR7QQU/RJE-Coding-Challenge-Step-4---Ryan-Herkt
