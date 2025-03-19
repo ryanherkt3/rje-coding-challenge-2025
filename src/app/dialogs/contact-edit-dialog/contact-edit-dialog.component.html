@@ -1,7 +1,9 @@
 <div class="dialog-container">
 
-    <ng-container *ngIf="data.contact != null; else adding">
-        <h3 class="dialog-title">Editing Contact with ID: {{data.contact?.id}}</h3>
+    <ng-container>
+        <h3 class="dialog-title">
+            {{data.contact != null ? ('Editing Contact with ID: ' + data.contact.id) : 'Adding new contact'}}
+        </h3>
     </ng-container>
 
     <form [formGroup]="contactForm" class="contact-form">
@@ -17,7 +19,3 @@
     </div>
 
 </div>
-
-<ng-template #adding>
-    <h3 class="dialog-title">Adding new contact</h3>
-</ng-template>
